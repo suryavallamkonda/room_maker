@@ -1,8 +1,8 @@
-import './index.css'
+import 'src/index.css'
 
 function Sidebar(){
   return (
-    <div className="h-screen bg-[#3AAFA9]">
+    <div className="h-screen bg-blue-200">
       <nav>
         <ul className='text-center '>
           <li>menu</li>

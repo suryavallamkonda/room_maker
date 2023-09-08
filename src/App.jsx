@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import './App.css'
 import Experience from "./Components/Experience";
-import Sidebar from "./Sidebar";
+import Sidebar from "./components/Sidebar";
 
 
 function App() {
