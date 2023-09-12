@@ -3,43 +3,42 @@ import React from "react";
 // import Experience from "./Components/Experience";
 // import Sidebar from "./components/Sidebar";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // import Navbar from "./components/Navbar";
-import Home from './pages/home';
-import Working from './pages/working';
+// import Home from './pages/home';
+// import Working from './pages/working';
 import './App.css'
 
 
 function App() {
   return (
-      <Router>
-          <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/working" element = {<Working />} />
-          </Routes>
-      </Router>
+    <body className="bg-black h-screen overflow-hidden">
+      <div data-value="headbar" className="w-screen h-10 bg-white fixed">
+        test
+      </div>
+    </body>
   );
 }
 
-function Layout() {
-  return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/working">Working</Link>
-          </li>
-        </ul>
-      </nav>
-      <hr />
-      <Outlet />
-    </div>
-  );
-}
+// function Layout() {
+//   return (
+//     <div>
+//       <nav>
+//         <ul>
+//           <li>
+//             <Link to="/">Home</Link>
+//           </li>
+//           <li>
+//             <Link to="/working">Working</Link>
+//           </li>
+//         </ul>
+//       </nav>
+//       <hr />
+//       <Outlet />
+//     </div>
+//   );
+// }
 
 
 
