@@ -10,6 +10,8 @@ export default {
     extend: {
       fontFamily: {
         'ubuntu': ['Ubuntu', 'sans-serif'],
+        'proza': ['Proza Libre', 'sans-serif'],
+        'montserrat': ['Montserrat', 'sans-serif']
       }
     },
   },
