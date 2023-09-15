@@ -92,41 +92,40 @@ export default App;
 function App() {
   return (
     <body className="h-screen w-screen bg-white flex flex-col">
-
-      <header className="bg-neutral-200 h-fit w-full flex flex-row justify-between top-0 z-50 px-52 py-10 rounded-b-lg drop-shadow-xl">
+      <header className="container border-green-500 border-4 bg-neutral-200 max-w-full h-[9vh] flex flex-row justify-between p-[1vw]">
         <a href="#">
-          <h1 className="text-black font-montserrat text-6xl">
+          <h1 className="text-black font-montserrat text-[3vw] bg-purple-300">
             Room Maker
           </h1>
         </a>
-        
-        <nav className="">
-          <ul className="flex flex-col md:flex-row rounded-md p-2 mx-4">
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-black text-2xl font-montserrat rounded hover:bg-green-200" aria-current="page">Home</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-black text-2xl font-montserrat rounded hover:bg-green-200">Design</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-black text-2xl font-montserrat rounded hover:bg-green-200">About</a>
-           </li>
+        <nav className="bg-red-300 p-[1vw]">
+          <ul className="flex flex-col md:flex-row rounded-md">
+            <li>
+              <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200" aria-current="page">Home</a>
+            </li>
+            <li>
+              <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200">Design</a>
+            </li>
+            <li>
+              <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200">About</a>
+            </li>
           </ul>
         </nav>
       </header>
-      <main className="h-full flex flex-row bg-gradient-to-r from-neutral-500 to-neutral-300">
-        <article className="bg-inherit w-full p-[15rem] flex flex-col justify-evenly">
-          <section className="bg-inherit text-[8rem] font-montserrat">room maker</section>
-          <section className="bg-inherit text-[2rem] font-montserrat">design your room!</section>
-        </article>
-        <section className="bg-inherit w-full h-full p-16">
+      {/* <main className="container border-red-600 border-4"> 
+          <article className="bg-purple-100 w-full p-32 flex flex-col justify-evenly">
+            <section className="bg-purple-200 text-8xl font-montserrat w-fit">room maker</section>
+            <section className="bg-inherit text-[2rem] font-montserrat">design your room!</section>
+          </article>
+        <section className="bg-red-100 w-full h-full p-16">
           <Canvas className="bg-inherit">
             <Experience />
           </Canvas>
         </section>
-        
-      </main>
+      </main> */}
+{/*className="h-full flex flex-row bg-gradient-to-r from-neutral-500 to-neutral-300"*/}
 
+      
       {/* <div className="bg-blue-100 h-[90%] w-[5%] fixed top-[10%]">
         <Sidebar />
       </div>
