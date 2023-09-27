@@ -5,7 +5,6 @@ import Sidebar from "./components/Sidebar";
 
 // import Home from './pages/home';
 import './App.css'
-import GridBox from './pages/gridbox'
 import { Backdrop, Box, Environment, OrbitControls, Plane, SpotLight, Stage, Stars, useTexture } from "@react-three/drei";
 import { MeshStandardMaterial } from "three";
 
@@ -13,58 +12,49 @@ import { MeshStandardMaterial } from "three";
 
 function App() {
   return (
-    <body className="h-screen w-screen">
-      <Canvas>
-        <ambientLight />
-        <Plane args={[document.documentElement.clientHeight, document.documentElement.clientWidth]}>
-          <meshStandardMaterial map={useTexture('./textures/grid.png')} />
-        </Plane>
-
-      </Canvas>
-    </body>
-    // <body>
-    //   <header className="container border-green-500 border-4 bg-neutral-200 max-w-full h-[9vh] flex flex-row justify-between p-[1vw]">
-    //     <a href="#">
-    //       <h1 className="text-black font-montserrat text-[3vw] bg-purple-300">
-    //         Room Maker
-    //       </h1>
-    //     </a>
-    //     <nav className="bg-red-300 p-[1vw]">
-    //       <ul className="flex flex-col md:flex-row rounded-md">
-    //         <li>
-    //           <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200" aria-current="page">Home</a>
-    //         </li>
-    //         <li>
-    //           <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200">Design</a>
-    //         </li>
-    //         <li>
-    //           <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200">About</a>
-    //         </li>
-    //       </ul>
-    //     </nav>
-    //   </header>
-    //   <main className="container border-red-600 border-4"> 
-    //       <article className="bg-purple-100 w-full p-32 flex flex-col justify-evenly">
-    //         <section className="bg-purple-200 text-8xl font-montserrat w-fit">room maker</section>
-    //         <section className="bg-inherit text-[2rem] font-montserrat">design your room!</section>
-    //       </article>
-    //     <section className="bg-red-100 w-full h-full p-16">
-    //       <Canvas className="bg-inherit">
-    //         <Experience />
-    //       </Canvas>
-    //     </section>
-    //   </main>
+    <body>
+      <header className="container border-green-500 border-4 bg-neutral-200 max-w-full h-[9vh] flex flex-row justify-between p-[1vw]">
+        <a href="#">
+          <h1 className="text-black font-montserrat text-3xl bg-purple-300">
+            Room Maker
+          </h1>
+        </a>
+        {/* <nav className="bg-red-300 p-[1vw]">
+          <ul className="flex flex-col md:flex-row rounded-md">
+            <li>
+              <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200" aria-current="page">Home</a>
+            </li>
+            <li>
+              <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200">Design</a>
+            </li>
+            <li>
+              <a href="#" class="block px-[0.5vw] py-[0.75vh] bg-amber-600 text-black text-[1vw] font-montserrat hover:bg-green-200">About</a>
+            </li>
+          </ul>
+        </nav> */}
+      </header>
+      {/* <main className="container border-red-600 border-4"> 
+          <article className="bg-purple-100 w-full p-32 flex flex-col justify-evenly">
+            <section className="bg-purple-200 text-8xl font-montserrat w-fit">room maker</section>
+            <section className="bg-inherit text-[2rem] font-montserrat">design your room!</section>
+          </article>
+        <section className="bg-red-100 w-full h-full p-16">
+          <Canvas className="bg-inherit">
+            <Experience />
+          </Canvas>
+        </section>
+      </main> */}
       
-    //   <div className="bg-blue-100 h-[90%] w-[5%] fixed top-[10%]">
-    //     <Sidebar />
-    //   </div>
-    //   <div className="h-[85%] w-[85%] bg-red-200 drop-shadow-lg fixed inset-[10%] left-[5%]">
-    //     <Canvas>
-    //       <color attach="background" args={["#983322"]} />
-    //       <Experience />
-    //     </Canvas> 
-    //   </div>
-    // </body>
+      {/* <div className="bg-blue-100 h-[90%] w-[5%] fixed top-[10%]">
+        <Sidebar />
+      </div>
+      <div className="h-[85%] w-[85%] bg-red-200 drop-shadow-lg fixed inset-[10%] left-[5%]">
+        <Canvas>
+          <color attach="background" args={["#983322"]} />
+          <Experience />
+        </Canvas> 
+      </div> */}
+    </body>
   )
 }
 
