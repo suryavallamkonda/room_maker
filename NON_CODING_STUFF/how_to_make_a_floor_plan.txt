@@ -1,0 +1,31 @@
+1. list requirements
+    what you need for the room
+
+2. measure
+    measure twice
+    footprint of space
+    doorways
+    entries
+    windows
+    walls
+        floor to ceiling
+        wall to wall
+        electrical outlets
+        light switches
+        any other switches
+    permanent fixtures
+        fireplaces
+        mantles
+        shelves
+    any other objects inside the space
+
+3. scale
+    fit to screen
+    common scale is 1/4 in = 1 foot
+
+4. think about sightlines
+    what will be visible from where?
+    when sitting?
+    when standing?
+    windows, doors, walls are most important to consider
+
