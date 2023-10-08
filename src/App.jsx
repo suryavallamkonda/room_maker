@@ -8,8 +8,8 @@ export default function App() {
   return (
     <>
       {/* <HeaderDock /> */}
-      {/* <MainInformation /> */}
-      <TestingGround />
+      <MainInformation />
+      {/* <TestingGround /> */}
     </>
   );
 }

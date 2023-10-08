@@ -1,8 +1,4 @@
 export default function TestingGround() {
-  const title = document.getElementById("splash");
-
-  title.onmouseover = console.log("hi");
-
   return (
     <>
       <main className="bg-black h-screen overflow-hidden py-[50vh]">
