@@ -1,26 +1,35 @@
 import React from "react";
-import { OrbitControls } from "@react-three/drei";
+import { CameraControls, OrbitControls, Stars, Sky, Bounds } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-
-import Chair from "../catalog/Chair";
+import { Room } from "../Room";
+import { Armchair } from "../Armchair";
 
 export default function MainInformation() {
   return (
-    <main className="border-red-600 border-4 h-screen">
-      {/* <article className="bg-purple-100 w-full p-32 flex flex-col justify-evenly">
-        <section className="bg-purple-200 text-8xl font-montserrat w-fit">
-          room maker
-        </section>
-        <section className="bg-inherit text-[2rem] font-montserrat">
-          design your room!
-        </section>
-      </article> */}
-      <section className="w-full h-full p-16">
-        <Canvas id="3d" className="bg-inherit bg-red-100">
-          <OrbitControls />
-          <ambientLight />
-          <Chair />
-          {/* <Experience /> */}
+    <main className="border-red-600 border-4 h-full w-full">
+      <section className="w-full h-full p-0">
+        <Canvas>
+          <Bounds>
+            <CameraControls
+              maxPolarAngle={Math.PI / 2.2}
+              minPolarAngle={-90}
+              minDistance={1}
+              maxDistance={10}
+              makeDefault
+            />
+            <ambientLight />
+            <Sky
+              distance={450000}
+              sunPosition={[0, 1, 0]}
+              inclination={0}
+              azimuth={0.25}
+            />
+            {/* <Armchair position={[0, 1, 0]}/> */}
+
+            <Room />
+
+            <axesHelper args={[5]} />
+          </Bounds>
         </Canvas>
       </section>
     </main>
