@@ -4,23 +4,25 @@ import MainInformation from "./components/MainInformation";
 
 function Home() {
   return (
-    <section className="bg-[#316B83] h-screen">
-      <div className="grid h-full px-4 py-8 mx-auto grid-cols-12 grid-rows-1">
-        <div className="mr-auto self-center ml-[25vw] z-[3] absolute border-blue-700 border-4">
-          <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-            convincing text
+    <section className="bg-slate-800 h-screen">
+      <div className="grid h-full grid-cols-12 grid-rows-1">
+        <div className="col-start-2 col-span-4 h-full self-center ml-0 p-10 bg-blue-100">
+          {/* <h1 className="mt-[40vh] w-fit mb-4 text-7xl font-extrabold tracking-tight leading-none p-5 text-white drop-shadow-lg">
+            design your rooms
           </h1>
-          <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-            yea uh you can like make a room and stuff
+          <p className="text-neutral-300 w-fit drop-shadow-lg p-5">
+            build and test your rooms in 3d
           </p>
-          <a href="#"
-            className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+          <a
+            href="/l"
+            className="p-5 inline-flex items-center justify-center mr-3 text-2xl text-white 
+            rounded-lg bg-black pointer-events-auto shadow-lg"
           >
             Get started
             <img className="w-8 h-8" src="svgs/arrow-white.svg" />
-          </a>
+          </a> */}
         </div>
-        <div className="col-end-13 col-span-12 w-full row-start-1">
+        <div className="bg-red-100 col-start-7 col-span-4 h-1/2 self-center rounded-3xl">
           <MainInformation />
         </div>
       </div>
@@ -30,7 +32,7 @@ function Home() {
 export default function App() {
   return (
     <>
-    <Home />
+      <Home />
     </>
   );
 }
