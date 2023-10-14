@@ -8,16 +8,20 @@ Source: https://sketchfab.com/3d-models/armchair--leather-c0755830a1d54d27b86a80
 Title: Armchair_ Leather
 */
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
 
 export function Armchair(props) {
-  const { nodes, materials } = useGLTF('/models/armchair-transformed.glb')
+  const { nodes, materials } = useGLTF("/armchair-transformed.glb");
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Plane001_Material_0.geometry} material={materials.Material} rotation={[-Math.PI / 2, 0, 0]} />
+      <mesh
+        geometry={nodes.Plane001_Material_0.geometry}
+        material={materials.Material}
+        rotation={[-Math.PI / 2, 0, 0]}
+      />
     </group>
-  )
+  );
 }
 
-useGLTF.preload('/models/armchair-transformed.glb')
+useGLTF.preload("/armchair-transformed.glb");
