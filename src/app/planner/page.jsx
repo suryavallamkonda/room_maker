@@ -19,24 +19,28 @@ import {
 } from "react-icons/bi";
 import { Canvas } from "@react-three/fiber";
 import { Armchair } from "@/catalog/Armchair";
-import { OrbitControls, Stage, Grid, Environment } from "@react-three/drei";
+import { OrbitControls, Grid, Environment, CameraControls } from "@react-three/drei";
 
 // save, import, undo, redo, select, delete, menu
 function Toolbar() {
   return (
-    <section className="bg-slate-100 h-screen basis-[6%] relative flex flex-col text-white shadow-lg items-center">
-      <ToolbarComponent icon={<BiPointer size="32" />} />
-      <ToolbarComponent icon={<BiSave size="32" />} />
-      <ToolbarComponent icon={<BiFolderOpen size="32" />} />
-      <ToolbarComponent icon={<BiDownload size="32" />} />
-      <ToolbarComponent icon={<BiRedo size="32" />} />
-      <ToolbarComponent icon={<BiUndo size="32" />} />
-      <ToolbarComponent icon={<BiTrash size="32" />} />
-      <ToolbarComponent icon={<BiPlus size="32" />} />
-      <i className="bg-slate-900 h-1 w-11/12" />
-
-      <ToolbarComponent icon={<BiCamera size="32" />} />
-      <ToolbarComponent icon={<BiShare size="32" />} />
+    <section className="bg-slate-100 h-full basis-[6%] relative flex flex-col justify-evenly text-white shadow-lg pb-24">
+      <g className="flex flex-col gap-4">
+        <ToolbarComponent icon={<BiPointer size="32" />} />
+        <ToolbarComponent icon={<BiSave size="32" />} />
+        <ToolbarComponent icon={<BiFolderOpen size="32" />} />
+        <ToolbarComponent icon={<BiDownload size="32" />} />
+        <ToolbarComponent icon={<BiRedo size="32" />} />
+        <ToolbarComponent icon={<BiUndo size="32" />} />
+        <ToolbarComponent icon={<BiTrash size="32" />} />
+        <ToolbarComponent icon={<BiPlus size="32" />} />
+      </g>
+      <i className="bg-slate-900 opacity-0 h-1 w-11/12" />
+      <g className="flex flex-col gap-4">
+        <ToolbarComponent icon={<BiCamera size="32" />} />
+        <ToolbarComponent icon={<BiShare size="32" />} />
+      </g>
+      
     </section>
   );
 }
@@ -56,7 +60,24 @@ function Planner() {
   return (
     <div className="w-full">
       {/* <h1 className="m-[33%] text-3xl">def a canvas so fr</h1> */}
-      <Canvas
+      <Canvas camera={{position:[0, 10, 0], fov:50}}>
+      <Environment files='potsdamer_platz_1k.hdr' environment />
+        <ambientLight />
+          <Armchair />
+        <CameraControls
+          // autoRotateSpeed={0.05}
+          // enableZoom={false}
+          makeDefault
+          minPolarAngle={0}
+          maxPolarAngle={1.47079632679}
+        />
+        <Grid 
+        infiniteGrid
+          fadeDistance={100}
+          fadeStrength={3}
+        />
+      </Canvas>
+      {/* <Canvas
         gl={{ logarithmicDepthBuffer: true }}
         shadows
         camera={{ position: [-15, 0, 10], fov: 25 }}
@@ -64,7 +85,7 @@ function Planner() {
         <fog attach="fog" args={["black", 15, 21.5]} />
         <Stage
           intensity={0.5}
-          environment="city"
+          // environment="city"
           shadows={{ type: "accumulative", bias: -0.001 }}
           adjustCamera={false}
         >
@@ -89,8 +110,7 @@ function Planner() {
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
         />
-        <Environment background preset="sunset" blur={0.8} />
-      </Canvas>
+      </Canvas> */}
     </div>
   );
 }
@@ -141,9 +161,9 @@ function CatalogProduct({ img, name }) {
 export default function App() {
   return (
     <section className="relative flex flex-row h-screen">
-      <Toolbar />
+      {/* <Toolbar /> */}
       <Planner />
-      <Catalog />
+      {/* <Catalog /> */}
     </section>
   );
 }

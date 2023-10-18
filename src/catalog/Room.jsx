@@ -12,7 +12,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Room(props) {
-  const { nodes, materials } = useGLTF("/room-transformed.glb");
+  const { nodes, materials } = useGLTF("/models/room-transformed.glb");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -122,4 +122,4 @@ export function Room(props) {
   );
 }
 
-useGLTF.preload("models/room-transformed.glb");
+useGLTF.preload("/models/room-transformed.glb");
