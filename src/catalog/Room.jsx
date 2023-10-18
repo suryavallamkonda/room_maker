@@ -122,4 +122,4 @@ export function Room(props) {
   );
 }
 
-useGLTF.preload("/room-transformed.glb");
+useGLTF.preload("models/room-transformed.glb");

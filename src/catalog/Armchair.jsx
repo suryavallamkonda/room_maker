@@ -24,4 +24,4 @@ export function Armchair(props) {
   );
 }
 
-useGLTF.preload("/armchair-transformed.glb");
+useGLTF.preload("models/armchair-transformed.glb");
