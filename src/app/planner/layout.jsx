@@ -1,18 +1,19 @@
-
-
+import { BiMenu } from "react-icons/bi";
 
 function Navbar() {
-    return (
-        <nav class="flex items-center justify-between flex-wrap bg-slate-600 p-6">
-        <a href="/" class="flex items-center flex-shrink-0 text-white mr-6">
-          <span class="font-bold space text-3xl tracking-wider">ROOM MAKER</span>
-        </a>
-      </nav>
-    )
+  return (
+    <div className="navbar bg-base-100">
+      <div className="flex-none">
+        <button className="btn btn-square btn-ghost">
+          <BiMenu size="1.5rem" />
+        </button>
+      </div>
+      <div className="flex-1">
+        <a className="btn btn-ghost normal-case text-xl">room maker</a>
+      </div>
+    </div>
+  );
 }
-
-
-
 
 export default function Layout({ children }) {
   return (
@@ -20,5 +21,5 @@ export default function Layout({ children }) {
       <Navbar />
       <main>{children}</main>
     </>
-  )
+  );
 }

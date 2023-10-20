@@ -19,12 +19,17 @@ import {
 } from "react-icons/bi";
 import { Canvas } from "@react-three/fiber";
 import { Armchair } from "@/catalog/Armchair";
-import { OrbitControls, Grid, Environment, CameraControls } from "@react-three/drei";
+import {
+  OrbitControls,
+  Grid,
+  Environment,
+  CameraControls,
+} from "@react-three/drei";
 
 // save, import, undo, redo, select, delete, menu
 function Toolbar() {
   return (
-    <section className="bg-slate-100 h-full basis-[6%] relative flex flex-col justify-evenly text-white shadow-lg pb-24">
+    <section className="h-full basis-[6%] relative flex flex-col justify-evenly shadow-lg pb-24">
       <g className="flex flex-col gap-4">
         <ToolbarComponent icon={<BiPointer size="32" />} />
         <ToolbarComponent icon={<BiSave size="32" />} />
@@ -40,7 +45,6 @@ function Toolbar() {
         <ToolbarComponent icon={<BiCamera size="32" />} />
         <ToolbarComponent icon={<BiShare size="32" />} />
       </g>
-      
     </section>
   );
 }
@@ -49,7 +53,7 @@ function ToolbarComponent({ icon }) {
   return (
     <div
       className="relative flex items-center justify-center p-3 rounded-sm mx-auto my-3 
-    shadow-lg bg-slate-200 text-slate-800 hover:bg-slate-300"
+    shadow-lg text-accent opacity-90 hover:opacity-100"
     >
       {icon}
     </div>
@@ -58,24 +62,25 @@ function ToolbarComponent({ icon }) {
 
 function Planner() {
   return (
-    <div className="w-full">
+    <div className="h-[90vh] w-[98vw] mx-auto">
       {/* <h1 className="m-[33%] text-3xl">def a canvas so fr</h1> */}
-      <Canvas camera={{position:[0, 10, 0], fov:50}}>
-      <Environment files='potsdamer_platz_1k.hdr' environment />
+      <Canvas
+        className="rounded-3xl"
+        camera={{ position: [0, 10, 0], fov: 50 }}
+      >
+        <Environment files="potsdamer_platz_1k.hdr" environment />
         <ambientLight />
-          <Armchair />
+        <Armchair />
         <CameraControls
           // autoRotateSpeed={0.05}
           // enableZoom={false}
           makeDefault
           minPolarAngle={0}
           maxPolarAngle={1.47079632679}
+          minDistance={1}
+          maxDistance={50}
         />
-        <Grid 
-        infiniteGrid
-          fadeDistance={100}
-          fadeStrength={3}
-        />
+        <Grid infiniteGrid fadeDistance={100} fadeStrength={3} />
       </Canvas>
       {/* <Canvas
         gl={{ logarithmicDepthBuffer: true }}
@@ -160,8 +165,9 @@ function CatalogProduct({ img, name }) {
 
 export default function App() {
   return (
+    // className="relative flex flex-row h-screen"
     <section className="relative flex flex-row h-screen">
-      {/* <Toolbar /> */}
+      {/* <Toolbar />  */}
       <Planner />
       {/* <Catalog /> */}
     </section>
