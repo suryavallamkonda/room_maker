@@ -6,7 +6,7 @@ import "./globals.css";
 import { Canvas } from "@react-three/fiber";
 import { BiArrowToRight } from "react-icons/bi";
 import { Room } from "@/catalog/Room";
-import { OrbitControls, Stage, Grid, Environment } from "@react-three/drei";
+import { OrbitControls, Stage, Grid } from "@react-three/drei";
 
 function Home() {
   return (
@@ -30,6 +30,7 @@ function Home() {
         </div>
         <div className="col-start-7 col-span-5 h-full flex flex-col justify-center">
           <div className="h-2/3 border-slate-600 rounded-md border-[1rem] pointer-events-none">
+<<<<<<< HEAD
             <Canvas
               gl={{ logarithmicDepthBuffer: true }}
               shadows
@@ -39,11 +40,24 @@ function Home() {
               <Stage
                 intensity={0.5}
                 environment="city"
+=======
+            <Canvas gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [0, 3, 0], fov: 40 }}>
+              <fog attach="fog" args={["black", 15, 21.5]} />
+              {/* <Stage
+                intensity={0.5}
+                // environment="city"
+>>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
                 shadows={{ type: "accumulative", bias: -0.001 }}
                 adjustCamera={false}
               >
                 <Room rotation={[0, Math.PI, 0]} position={[0, -1, 0]} />
+<<<<<<< HEAD
               </Stage>
+=======
+              </Stage> */}
+              <ambientLight />
+              <Room rotation={[0, Math.PI, 0]} position={[0, -1, 0]} />
+>>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
               <Grid
                 renderOrder={-1}
                 position={[0, -1.85, 0]}
@@ -56,16 +70,27 @@ function Home() {
                 fadeDistance={30}
               />
               <OrbitControls
+<<<<<<< HEAD
+=======
+                minDistance={4}
+>>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
                 autoRotate
                 autoRotateSpeed={0.05}
                 enableZoom={false}
                 makeDefault
+<<<<<<< HEAD
                 minPolarAngle={Math.PI / 2}
                 maxPolarAngle={Math.PI / 2}
               />
               {/* <Environment background preset="sunset" blur={0.8} /> */}
             </Canvas>
             {/* <img src="demo_room.png" className="w-full h-full opacity-70"/> */}
+=======
+                minPolarAngle={0}
+                maxPolarAngle={Math.PI / 2}
+              />
+            </Canvas>
+>>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
           </div>
         </div>
       </div>
