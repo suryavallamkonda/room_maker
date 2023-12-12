@@ -12,7 +12,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Armchair(props) {
-  const { nodes, materials } = useGLTF("/armchair-transformed.glb");
+  const { nodes, materials } = useGLTF("/models/armchair-transformed.glb");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -24,4 +24,4 @@ export function Armchair(props) {
   );
 }
 
-useGLTF.preload("models/armchair-transformed.glb");
+useGLTF.preload("/models/armchair-transformed.glb");
