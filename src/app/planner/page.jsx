@@ -21,7 +21,6 @@ import { OrbitControls, Stage, Grid, Environment } from "@react-three/drei";
 function Toolbar() {
   let size1 = "28";
   return (
-<<<<<<< HEAD
     <section className="bg-slate-100 h-full basis-[6%] relative flex flex-col text-white shadow-lg items-center align-middle justify-between">
       <ToolbarComponent icon={<BiPointer size={size1} />} />
       <ToolbarComponent icon={<BiSave size={size1} />} />
@@ -37,24 +36,6 @@ function Toolbar() {
       <ToolbarComponent icon={<BiShare size={size1} />} />
 
       <i className="bg-black h-20 w-11/12 opacity-0" />
-=======
-    <section className="h-full basis-[6%] relative flex flex-col justify-evenly shadow-lg pb-24">
-      <g className="flex flex-col gap-4">
-        <ToolbarComponent icon={<BiPointer size="32" />} />
-        <ToolbarComponent icon={<BiSave size="32" />} />
-        <ToolbarComponent icon={<BiFolderOpen size="32" />} />
-        <ToolbarComponent icon={<BiDownload size="32" />} />
-        <ToolbarComponent icon={<BiRedo size="32" />} />
-        <ToolbarComponent icon={<BiUndo size="32" />} />
-        <ToolbarComponent icon={<BiTrash size="32" />} />
-        <ToolbarComponent icon={<BiPlus size="32" />} />
-      </g>
-      <i className="bg-slate-900 opacity-0 h-1 w-11/12" />
-      <g className="flex flex-col gap-4">
-        <ToolbarComponent icon={<BiCamera size="32" />} />
-        <ToolbarComponent icon={<BiShare size="32" />} />
-      </g>
->>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
     </section>
   );
 }
@@ -97,7 +78,6 @@ function Planner() {
     }
   };
   return (
-<<<<<<< HEAD
     <div className="w-full">
       {/* <h1 className="m-[33%] text-3xl">def a canvas so fr</h1> */}
       <Canvas
@@ -114,7 +94,26 @@ function Planner() {
         >
           {models.map((model) => model)}
         </Stage>
-        
+        <Grid
+          renderOrder={-1}
+          position={[0, -1.85, 0]}
+          infiniteGrid
+          cellSize={0.6}
+          cellThickness={0.6}
+          sectionSize={3.3}
+          sectionThickness={1.5}
+          sectionColor={[0.5, 0.5, 10]}
+          fadeDistance={30}
+        />
+        <OrbitControls
+          autoRotate
+          autoRotateSpeed={0.05}
+          enableZoom={false}
+          makeDefault
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+        />
+        <Environment background preset="sunset" blur={0.8} />
       </Canvas>
     </div>
   );
@@ -156,83 +155,3 @@ export default function App() {
 
 
 
-
-
-
-<Grid
-          renderOrder={-1}
-          position={[0, -1.85, 0]}
-          infiniteGrid
-          cellSize={0.6}
-          cellThickness={0.6}
-          sectionSize={3.3}
-          sectionThickness={1.5}
-          sectionColor={[0.5, 0.5, 10]}
-          fadeDistance={30}
-        />
-        <OrbitControls
-          autoRotate
-          autoRotateSpeed={0.05}
-          enableZoom={false}
-          makeDefault
-          minPolarAngle={Math.PI / 2}
-          maxPolarAngle={Math.PI / 2}
-        />
-        <Environment background preset="sunset" blur={0.8} />
-      </Canvas>
-    </div>
-  );
-}
-
-function Catalog() {
-  return (
-    <section className="bg-slate-100 basis-1/6 overflow-y-scroll flex flex-col text-5xl items-center font-extrabold gap-4">
-      <h1 className="sticky shadow-lg shadow-neutral-600 rounded-b-xl top-0 z-[1] bg-slate-400 p-5 w-full text-center">
-        CATALOG
-      </h1>
-      <CatalogProduct
-        img={<img src="icons/armchair-icon.jpg" className="rounded-2xl" />}
-        name={"Armchair"}
-      />
-      <CatalogProduct
-        img={<img src="icons/armchair-icon.jpg" className="rounded-2xl" />}
-        name={"Armchair"}
-      />
-      <CatalogProduct
-        img={<img src="icons/armchair-icon.jpg" className="rounded-2xl" />}
-        name={"Armchair"}
-      />
-      <CatalogProduct
-        img={<img src="icons/armchair-icon.jpg" className="rounded-2xl" />}
-        name={"Armchair"}
-      />
-      <CatalogProduct
-        img={<img src="icons/armchair-icon.jpg" className="rounded-2xl" />}
-        name={"Armchair"}
-      />
-      <CatalogProduct
-        img={<img src="icons/blank.png" className="rounded-2xl opacity-0" />}
-        name={"Armchair"}
-      />
-    </section>
-  );
-}
-
-function CatalogProduct({ img, name }) {
-  return (
-    <div className="relative flex flex-col items-center justify-center w-2/3 mx-auto p-2">
-      {img}
-      <h2 className="text-xl text-slate-700 font-bold font-serif">{name}</h2>
-    </div>
-  );
-}
-
-export default function App() {
-  return (
-    <section className="relative flex flex-row h-screen">
-      <Toolbar />
-      <Planner />
-      <Catalog />
-    </section>
-  );
-}
