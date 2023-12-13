@@ -1,106 +1,267 @@
 "use client";
-
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./globals.css";
+// import {
+//   BiSave,
+//   BiFolderOpen,
+//   BiRedo,
+//   BiUndo,
+//   BiTrash,
+//   BiPlus,
+//   BiDownload,
+//   BiCamera,
+//   BiShare,
+//   BiPointer,
+// } from "react-icons/bi";
+// import { Canvas, useFrame } from "@react-three/fiber";
+// import { Armchair } from "@/catalog/Armchair";
+import Planner from "@/comps/Planner";
+// import { OrbitControls, Stage, Grid, Environment } from "@react-three/drei";
+// import * as THREE from "three";
 
-import { Canvas } from "@react-three/fiber";
-import { BiArrowToRight } from "react-icons/bi";
-import { Room } from "@/catalog/Room";
-import { OrbitControls, Stage, Grid } from "@react-three/drei";
+// save, import, undo, redo, select, delete, menu
+// function Toolbar() {
+//   // const [undoDisabled, setUndoDisabled] = useState(true);
+//   // const [redoDisabled, setRedoDisabled] = useState(true);
 
-function Home() {
-  return (
-    <section className="bg-slate-800 h-screen">
-      <div className="grid h-full grid-cols-12 grid-rows-1">
-        <div className="col-start-2 col-span-4 h-full self-center ml-0 p-10 bg-inherit">
-          <h1 className="mt-[40vh] w-fit mb-4 text-7xl font-extrabold tracking-tight leading-none p-5 text-white drop-shadow-lg">
-            Design 3D Rooms Instantly
-          </h1>
-          <p className="text-neutral-300 w-fit drop-shadow-lg p-5">
-            No hassle, just drag and drop.
-          </p>
-          <a
-            href="/planner"
-            className="p-5 inline-flex items-center justify-center mr-3 ml-4 text-2xl text-white
-            rounded-lg bg-slate-950 pointer-events-auto shadow-lg gap-3"
-          >
-            Get started
-            <BiArrowToRight size="32" />
-          </a>
-        </div>
-        <div className="col-start-7 col-span-5 h-full flex flex-col justify-center">
-          <div className="h-2/3 border-slate-600 rounded-md border-[1rem] pointer-events-none">
-<<<<<<< HEAD
-            <Canvas
-              gl={{ logarithmicDepthBuffer: true }}
-              shadows
-              camera={{ position: [0, 3, 0], fov: 40 }}
-            >
-              <fog attach="fog" args={["black", 15, 21.5]} />
-              <Stage
-                intensity={0.5}
-                environment="city"
-=======
-            <Canvas gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [0, 3, 0], fov: 40 }}>
-              <fog attach="fog" args={["black", 15, 21.5]} />
-              {/* <Stage
-                intensity={0.5}
-                // environment="city"
->>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
-                shadows={{ type: "accumulative", bias: -0.001 }}
-                adjustCamera={false}
-              >
-                <Room rotation={[0, Math.PI, 0]} position={[0, -1, 0]} />
-<<<<<<< HEAD
-              </Stage>
-=======
-              </Stage> */}
-              <ambientLight />
-              <Room rotation={[0, Math.PI, 0]} position={[0, -1, 0]} />
->>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
-              <Grid
-                renderOrder={-1}
-                position={[0, -1.85, 0]}
-                infiniteGrid
-                cellSize={0.6}
-                cellThickness={0.6}
-                sectionSize={3.3}
-                sectionThickness={1.5}
-                sectionColor={[0.5, 0.5, 10]}
-                fadeDistance={30}
-              />
-              <OrbitControls
-<<<<<<< HEAD
-=======
-                minDistance={4}
->>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
-                autoRotate
-                autoRotateSpeed={0.05}
-                enableZoom={false}
-                makeDefault
-<<<<<<< HEAD
-                minPolarAngle={Math.PI / 2}
-                maxPolarAngle={Math.PI / 2}
-              />
-              {/* <Environment background preset="sunset" blur={0.8} /> */}
-            </Canvas>
-            {/* <img src="demo_room.png" className="w-full h-full opacity-70"/> */}
-=======
-                minPolarAngle={0}
-                maxPolarAngle={Math.PI / 2}
-              />
-            </Canvas>
->>>>>>> 42e86b1ffa156566dbd4ebe35f83bc42238c133d
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+//   const setModels = (newModels) => {
+//     setState((prevState) => ({ ...prevState, models: newModels }));
+//   };
+//   const setHistory = (newHistory) => {
+//     setState((prevState) => ({ ...prevState, history: newHistory }));
+//   };
+//   const setUndoDisabled = (disabled) => {
+//     setState((prevState) => ({ ...prevState, undoDisabled: disabled }));
+//   };
+//   const setRedoDisabled = (disabled) => {
+//     setState((prevState) => ({ ...prevState, redoDisabled: disabled }));
+//   };
+//   const handleUndo = () => {
+//     if (!undoDisabled) {
+//       const [prevSnapshot] = history.pop();
+//       setModels(prevSnapshot.models);
+//       setHistory(history);
+//       setUndoDisabled(history.length === 0);
+//       setRedoDisabled(true);
+//     }
+//   };
+//   const handleRedo = () => {
+//     if (!redoDisabled) {
+//       const nextSnapshot = history.pop();
+//       const redoSnapshot = history.pop();
+//       setModels(redoSnapshot.models);
+//       setHistory([redoSnapshot, nextSnapshot]);
+//       setUndoDisabled(false);
+//       setRedoDisabled(history.length === 1);
+//     }
+//   };
+//   let size1 = "28";
+//   return (
+//     <section className="bg-slate-100 h-full basis-[6%] relative flex flex-col text-white shadow-lg items-center align-middle justify-between">
+//       <ToolbarComponent
+//         icon={<BiPointer size={size1} onClick={handleAddModel} />}
+//       />
+//       <ToolbarComponent icon={<BiSave size={size1} />} />
+//       <ToolbarComponent icon={<BiFolderOpen size={size1} />} />
+//       <ToolbarComponent icon={<BiDownload size={size1} />} />
+//       <ToolbarComponent icon={<BiRedo size={size1} />} />
+//       <ToolbarComponent icon={<BiUndo size={size1} />} />
+//       <ToolbarComponent icon={<BiTrash size={size1} />} />
+//       <i className="bg-inherit h-10 w-11/12" />
+
+//       <ToolbarComponent
+//         icon={
+//           <BiPlus size={size1} onClick={handleRedo} disabled={redoDisabled} />
+//         }
+//       />
+//       <ToolbarComponent
+//         icon={
+//           <BiCamera size={size1} onClick={handleUndo} disabled={undoDisabled} />
+//         }
+//       />
+//       <ToolbarComponent
+//         icon={
+//           <BiShare
+//             size={size1}
+//             onClick={() => {
+//               setModels([]);
+//               setHistory([]);
+//             }}
+//           />
+//         }
+//       />
+
+//       <i className="bg-black h-20 w-11/12 opacity-0" />
+//     </section>
+//   );
+// }
+// function ToolbarComponent({ icon }) {
+//   return (
+//     <div
+//       className="relative flex items-center justify-center p-3 rounded-sm mx-auto my-3
+//     shadow-lg text-accent opacity-90 hover:opacity-100"
+//     >
+//       {icon}
+//     </div>
+//   );
+// }
+// function Model(props) {
+//   const mesh = useRef();
+//   useFrame(() => {
+//     mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+//   });
+
+//   const allModels = {
+//     box: new THREE.BoxGeometry(1, 1, 1),
+//     donut: new THREE.TorusGeometry(0.5, 0.2, 0.3, 1),
+//     rectangle: new THREE.BoxGeometry(1, 3, 5),
+//   };
+
+//   const allColors = {
+//     box: "red",
+//     donut: "pink",
+//     rectangle: "blue",
+//   };
+
+//   return (
+//     <mesh {...props} ref={mesh} scale={[1.5, 1.5, 1.5]}>
+//       <primitive object={allShapes[props.shape]} attach={"geometry"} />
+//       <meshStandardMaterial color={allColors[props.shape]} />
+//     </mesh>
+//   );
+// }
+// // function Planner() {
+// //   const [modelsOnCanvas, setModelsOnCanvas] = useState([]);
+
+// //   const addModel = (e) => {
+// //     const modelCount = modelsOnCanvas.length;
+// //     const model = e.target.getAttribute("data-shape");
+// //     console.log(model);
+
+// //     setModelsOnCanvas([
+// //       ...modelsOnCanvas,
+// //       <Model
+// //         model={model}
+// //         key={modelCount}
+// //         position={[-10 + modelCount * 3, 0, 0]}
+// //       />,
+// //     ]);
+// //   };
+// //   return (
+// //     <div>
+// //       <Canvas>
+// //         <ambientLight intensity={0.5} />
+// //         <spotLight position={[10, 10, 10]} angle={0.95} />
+
+// //         {[...shapesOnCanvas]}
+// //       </Canvas>
+// //       <div className="buttons">
+// //         <button onClick={addShape} data-shape={"box"}>
+// //           Box{" "}
+// //         </button>
+// //         <button onClick={addShape} data-shape={"cylinder"}>
+// //           Cylinder{" "}
+// //         </button>
+// //         <button onClick={addShape} data-shape={"donut"}>
+// //           Donut{" "}
+// //         </button>
+// //       </div>
+// //     </div>
+// //   );
+// //   // return (
+// //   //   <div className="w-full">
+// //   //     <button onClick={() => pushCanvas(document.getElementById("0"))}>
+// //   //       Save Canvas
+// //   //     </button>
+// //   //     <button
+// //   //       onClick={() => {
+// //   //         const canvas = popCanvas();
+// //   //         if (canvas) {
+// //   //           //something to update here
+// //   //         }
+// //   //       }}
+// //   //     ></button>
+// //   //     <Canvas
+// //   //       gl={{ logarithmicDepthBuffer: true }}
+// //   //       shadows
+// //   //       camera={{ position: [-15, 0, 10], fov: 25 }}
+// //   //     >
+// //   //       <fog attach="fog" args={["black", 15, 21.5]} />
+// //   //       <Stage
+// //   //         intensity={0.5}
+// //   //         shadows={{ type: "accumulative", bias: -0.001 }}
+// //   //         adjustCamera={false}
+// //   //       >
+// //   //         {[...modelsOnCanvas]}
+// //   //       </Stage>
+// //   //       <Grid
+// //   //         renderOrder={-1}
+// //   //         position={[0, -1.85, 0]}
+// //   //         infiniteGrid
+// //   //         cellSize={0.6}
+// //   //         cellThickness={0.6}
+// //   //         sectionSize={3.3}
+// //   //         sectionThickness={1.5}
+// //   //         sectionColor={[0.5, 0.5, 10]}
+// //   //         fadeDistance={30}
+// //   //       />
+// //   //       <OrbitControls
+// //   //         autoRotate
+// //   //         autoRotateSpeed={0.05}
+// //   //         enableZoom={false}
+// //   //         makeDefault
+// //   //         minPolarAngle={Math.PI / 2}
+// //   //         maxPolarAngle={Math.PI / 2}
+// //   //       />
+// //   //       <Environment background preset="sunset" blur={0.8} />
+// //   //     </Canvas>
+// //   //     <Canvas>
+// //   //       <div>
+// //   //         <button onClick={addModel} data-shape={"box"}>
+// //   //           Box
+// //   //         </button>
+// //   //         <button onClick={addModel} data-shape={"donut"}>
+// //   //           Box
+// //   //         </button>
+// //   //         <button onClick={addModel} data-shape={"rectangle"}>
+// //   //           Box
+// //   //         </button>
+// //   //       </div>
+// //   //     </Canvas>
+// //   //   </div>
+// //   // );
+// // }
+// function Catalog({ onAddModel }) {
+//   return (
+//     <section className="bg-slate-100 basis-1/6 overflow-y-scroll flex flex-col text-5xl items-center font-extrabold gap-4">
+//       <h1 className="sticky shadow-lg shadow-neutral-600 rounded-b-xl top-0 z-[1] bg-slate-400 p-5 w-full text-center">
+//         CATALOG
+//       </h1>
+//       <CatalogProduct
+//         img={<img src="icons/armchair-icon.jpg" className="rounded-2xl" />}
+//         name="Armchair"
+//         onAddModel={onAddModel}
+//         model={Armchair}
+//       />
+//     </section>
+//   );
+// }
+// function CatalogProduct({ img, name, onAddModel, model }) {
+//   return (
+//     <div className="relative flex flex-col items-center justify-center w-2/3 mx-auto p-2">
+//       {img}
+//       <h2 className="text-xl text-slate-700 font-bold font-serif">{name}</h2>
+//       <button onClick={() => onAddModel(model)}>Add Model</button>
+//     </div>
+//   );
+// }
 export default function App() {
   return (
-    <>
-      <Home />
-    </>
+    <section className="relative flex flex-row h-screen">
+      {/* <Toolbar /> */}
+      <span className="text-5xl bg-red">test</span>
+      <Planner />
+      {/* <Catalog /> */}
+    </section>
   );
 }
