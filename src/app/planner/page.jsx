@@ -17,12 +17,69 @@ import { Canvas } from "@react-three/fiber";
 import { Armchair } from "@/catalog/Armchair";
 import { OrbitControls, Stage, Grid, Environment } from "@react-three/drei";
 
+const useCanvasStack = (maxSize = 5) => {
+  const [stack, setStack] = useState([]);
+  const pushCanvas = (canvas) => {
+    if (stack.length === maxSize) {
+      stack.shift();
+    }
+    setStack([canvas, ...stack]);
+  };
+  const popCanvas = () => {
+    if (stack.length) {
+      const poppedCanvas = stack.shift();
+      return poppedCanvas;
+    }
+    return null;
+  };
+
+  const clearStack = () => setStack([]);
+
+  return { stack, pushCanvas, popCanvas, clearStack };
+};
+
 // save, import, undo, redo, select, delete, menu
 function Toolbar() {
+  // const [undoDisabled, setUndoDisabled] = useState(true);
+  // const [redoDisabled, setRedoDisabled] = useState(true);
+
+  const setModels = (newModels) => {
+    setState((prevState) => ({ ...prevState, models: newModels }));
+  };
+  const setHistory = (newHistory) => {
+    setState((prevState) => ({ ...prevState, history: newHistory }));
+  };
+  const setUndoDisabled = (disabled) => {
+    setState((prevState) => ({ ...prevState, undoDisabled: disabled }));
+  };
+  const setRedoDisabled = (disabled) => {
+    setState((prevState) => ({ ...prevState, redoDisabled: disabled }));
+  };
+  const handleUndo = () => {
+    if (!undoDisabled) {
+      const [prevSnapshot] = history.pop();
+      setModels(prevSnapshot.models);
+      setHistory(history);
+      setUndoDisabled(history.length === 0);
+      setRedoDisabled(true);
+    }
+  };
+  const handleRedo = () => {
+    if (!redoDisabled) {
+      const nextSnapshot = history.pop();
+      const redoSnapshot = history.pop();
+      setModels(redoSnapshot.models);
+      setHistory([redoSnapshot, nextSnapshot]);
+      setUndoDisabled(false);
+      setRedoDisabled(history.length === 1);
+    }
+  };
   let size1 = "28";
   return (
     <section className="bg-slate-100 h-full basis-[6%] relative flex flex-col text-white shadow-lg items-center align-middle justify-between">
-      <ToolbarComponent icon={<BiPointer size={size1} />} />
+      <ToolbarComponent
+        icon={<BiPointer size={size1} onClick={handleAddModel} />}
+      />
       <ToolbarComponent icon={<BiSave size={size1} />} />
       <ToolbarComponent icon={<BiFolderOpen size={size1} />} />
       <ToolbarComponent icon={<BiDownload size={size1} />} />
@@ -31,9 +88,27 @@ function Toolbar() {
       <ToolbarComponent icon={<BiTrash size={size1} />} />
       <i className="bg-inherit h-10 w-11/12" />
 
-      <ToolbarComponent icon={<BiPlus size={size1} />} />
-      <ToolbarComponent icon={<BiCamera size={size1} />} />
-      <ToolbarComponent icon={<BiShare size={size1} />} />
+      <ToolbarComponent
+        icon={
+          <BiPlus size={size1} onClick={handleRedo} disabled={redoDisabled} />
+        }
+      />
+      <ToolbarComponent
+        icon={
+          <BiCamera size={size1} onClick={handleUndo} disabled={undoDisabled} />
+        }
+      />
+      <ToolbarComponent
+        icon={
+          <BiShare
+            size={size1}
+            onClick={() => {
+              setModels([]);
+              setHistory([]);
+            }}
+          />
+        }
+      />
 
       <i className="bg-black h-20 w-11/12 opacity-0" />
     </section>
@@ -52,6 +127,7 @@ function ToolbarComponent({ icon }) {
 function Planner() {
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState(null);
+  const { stack, pushCanvas, popCanvas } = useCanvasStack();
 
   const handleAddModel = (model, event) => {
     const { clientX, clientY } = event.nativeEvent;
@@ -79,8 +155,20 @@ function Planner() {
   };
   return (
     <div className="w-full">
+      <button onClick={() => pushCanvas(document.getElementById("0"))}>
+        Save Canvas
+      </button>
+      <button
+        onClick={() => {
+          const canvas = popCanvas();
+          if (canvas) {
+            //something to update here
+          }
+        }}
+      ></button>
       {/* <h1 className="m-[33%] text-3xl">def a canvas so fr</h1> */}
       <Canvas
+        key={0}
         gl={{ logarithmicDepthBuffer: true }}
         shadows
         camera={{ position: [-15, 0, 10], fov: 25 }}
@@ -152,6 +240,3 @@ export default function App() {
     </section>
   );
 }
-
-
-
