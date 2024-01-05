@@ -13,11 +13,11 @@ import "./globals.css";
 //   BiShare,
 //   BiPointer,
 // } from "react-icons/bi";
-// import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 // import { Armchair } from "@/catalog/Armchair";
-import Planner from "@/comps/Planner";
+// import Planner from "@/comps/Planner";
 // import { OrbitControls, Stage, Grid, Environment } from "@react-three/drei";
-// import * as THREE from "three";
+import * as THREE from "three";
 
 // save, import, undo, redo, select, delete, menu
 // function Toolbar() {
@@ -105,132 +105,136 @@ import Planner from "@/comps/Planner";
 //     </div>
 //   );
 // }
-// function Model(props) {
-//   const mesh = useRef();
-//   useFrame(() => {
-//     mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
-//   });
+function Model(props) {
+  const mesh = useRef();
+  useFrame(() => {
+    mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+  });
 
-//   const allModels = {
-//     box: new THREE.BoxGeometry(1, 1, 1),
-//     donut: new THREE.TorusGeometry(0.5, 0.2, 0.3, 1),
-//     rectangle: new THREE.BoxGeometry(1, 3, 5),
-//   };
+  const allModels = {
+    box: new THREE.BoxGeometry(1, 1, 1),
+    cylinder: new THREE.CylinderGeometry(1, 1, 1, 32),
+    donut: new THREE.TorusGeometry(0.5, 0.2, 3, 20),
+  };
 
-//   const allColors = {
-//     box: "red",
-//     donut: "pink",
-//     rectangle: "blue",
-//   };
+  const allColors = {
+    box: "red",
+    cylinder: "pink",
+    donut: "blue",
+  };
 
-//   return (
-//     <mesh {...props} ref={mesh} scale={[1.5, 1.5, 1.5]}>
-//       <primitive object={allShapes[props.shape]} attach={"geometry"} />
-//       <meshStandardMaterial color={allColors[props.shape]} />
-//     </mesh>
-//   );
-// }
-// // function Planner() {
-// //   const [modelsOnCanvas, setModelsOnCanvas] = useState([]);
+  return (
+    <mesh {...props} ref={mesh} scale={[1.5, 1.5, 1.5]}>
+      <primitive object={allModels[props.model]} attach={"geometry"} />
+      <meshStandardMaterial color={allColors[props.model]} />
+    </mesh>
+  );
+}
 
-// //   const addModel = (e) => {
-// //     const modelCount = modelsOnCanvas.length;
-// //     const model = e.target.getAttribute("data-shape");
-// //     console.log(model);
+function Planner() {
+  const [modelsOnCanvas, setModelsOnCanvas] = useState([]);
 
-// //     setModelsOnCanvas([
-// //       ...modelsOnCanvas,
-// //       <Model
-// //         model={model}
-// //         key={modelCount}
-// //         position={[-10 + modelCount * 3, 0, 0]}
-// //       />,
-// //     ]);
-// //   };
-// //   return (
-// //     <div>
-// //       <Canvas>
-// //         <ambientLight intensity={0.5} />
-// //         <spotLight position={[10, 10, 10]} angle={0.95} />
+  const addModel = (e) => {
+    //# of modelOnCanvas
+    const modelCount = modelsOnCanvas.length;
+    // shape
+    const model = e.target.getAttribute("data-shape");
+    console.log(model);
+    // push new  model
+    setModelsOnCanvas([
+      ...modelsOnCanvas,
+      <Model
+        model={model}
+        key={modelCount}
+        position={[-10 + modelCount * 3, 0, 0]}
+      />,
+    ]);
+  };
+  return (
+    // unpack + buttons
+    <div>
+      <Canvas>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.95} />
+        {[...modelsOnCanvas]}
+      </Canvas>
+      <div className="buttons">
+        <button onClick={addModel} data-shape={"box"}>
+          Box{" "}
+        </button>
+        <button onClick={addModel} data-shape={"cylinder"}>
+          Cylinder{" "}
+        </button>
+        <button onClick={addModel} data-shape={"donut"}>
+          Donut{" "}
+        </button>
+      </div>
+    </div>
+  );
+}
 
-// //         {[...shapesOnCanvas]}
-// //       </Canvas>
-// //       <div className="buttons">
-// //         <button onClick={addShape} data-shape={"box"}>
-// //           Box{" "}
-// //         </button>
-// //         <button onClick={addShape} data-shape={"cylinder"}>
-// //           Cylinder{" "}
-// //         </button>
-// //         <button onClick={addShape} data-shape={"donut"}>
-// //           Donut{" "}
-// //         </button>
-// //       </div>
-// //     </div>
-// //   );
-// //   // return (
-// //   //   <div className="w-full">
-// //   //     <button onClick={() => pushCanvas(document.getElementById("0"))}>
-// //   //       Save Canvas
-// //   //     </button>
-// //   //     <button
-// //   //       onClick={() => {
-// //   //         const canvas = popCanvas();
-// //   //         if (canvas) {
-// //   //           //something to update here
-// //   //         }
-// //   //       }}
-// //   //     ></button>
-// //   //     <Canvas
-// //   //       gl={{ logarithmicDepthBuffer: true }}
-// //   //       shadows
-// //   //       camera={{ position: [-15, 0, 10], fov: 25 }}
-// //   //     >
-// //   //       <fog attach="fog" args={["black", 15, 21.5]} />
-// //   //       <Stage
-// //   //         intensity={0.5}
-// //   //         shadows={{ type: "accumulative", bias: -0.001 }}
-// //   //         adjustCamera={false}
-// //   //       >
-// //   //         {[...modelsOnCanvas]}
-// //   //       </Stage>
-// //   //       <Grid
-// //   //         renderOrder={-1}
-// //   //         position={[0, -1.85, 0]}
-// //   //         infiniteGrid
-// //   //         cellSize={0.6}
-// //   //         cellThickness={0.6}
-// //   //         sectionSize={3.3}
-// //   //         sectionThickness={1.5}
-// //   //         sectionColor={[0.5, 0.5, 10]}
-// //   //         fadeDistance={30}
-// //   //       />
-// //   //       <OrbitControls
-// //   //         autoRotate
-// //   //         autoRotateSpeed={0.05}
-// //   //         enableZoom={false}
-// //   //         makeDefault
-// //   //         minPolarAngle={Math.PI / 2}
-// //   //         maxPolarAngle={Math.PI / 2}
-// //   //       />
-// //   //       <Environment background preset="sunset" blur={0.8} />
-// //   //     </Canvas>
-// //   //     <Canvas>
-// //   //       <div>
-// //   //         <button onClick={addModel} data-shape={"box"}>
-// //   //           Box
-// //   //         </button>
-// //   //         <button onClick={addModel} data-shape={"donut"}>
-// //   //           Box
-// //   //         </button>
-// //   //         <button onClick={addModel} data-shape={"rectangle"}>
-// //   //           Box
-// //   //         </button>
-// //   //       </div>
-// //   //     </Canvas>
-// //   //   </div>
-// //   // );
-// // }
+// return (
+//   <div className="w-full">
+//     <button onClick={() => pushCanvas(document.getElementById("0"))}>
+//       Save Canvas
+//     </button>
+//     <button
+//       onClick={() => {
+//         const canvas = popCanvas();
+//         if (canvas) {
+//           //something to update here
+//         }
+//       }}
+//     ></button>
+//     <Canvas
+//       gl={{ logarithmicDepthBuffer: true }}
+//       shadows
+//       camera={{ position: [-15, 0, 10], fov: 25 }}
+//     >
+//       <fog attach="fog" args={["black", 15, 21.5]} />
+//       <Stage
+//         intensity={0.5}
+//         shadows={{ type: "accumulative", bias: -0.001 }}
+//         adjustCamera={false}
+//       >
+//         {[...modelsOnCanvas]}
+//       </Stage>
+//       <Grid
+//         renderOrder={-1}
+//         position={[0, -1.85, 0]}
+//         infiniteGrid
+//         cellSize={0.6}
+//         cellThickness={0.6}
+//         sectionSize={3.3}
+//         sectionThickness={1.5}
+//         sectionColor={[0.5, 0.5, 10]}
+//         fadeDistance={30}
+//       />
+//       <OrbitControls
+//         autoRotate
+//         autoRotateSpeed={0.05}
+//         enableZoom={false}
+//         makeDefault
+//         minPolarAngle={Math.PI / 2}
+//         maxPolarAngle={Math.PI / 2}
+//       />
+//       <Environment background preset="sunset" blur={0.8} />
+//     </Canvas>
+//     <Canvas>
+//       <div>
+//         <button onClick={addModel} data-shape={"box"}>
+//           Box
+//         </button>
+//         <button onClick={addModel} data-shape={"donut"}>
+//           Box
+//         </button>
+//         <button onClick={addModel} data-shape={"rectangle"}>
+//           Box
+//         </button>
+//       </div>
+//     </Canvas>
+//   </div>
+// );
 // function Catalog({ onAddModel }) {
 //   return (
 //     <section className="bg-slate-100 basis-1/6 overflow-y-scroll flex flex-col text-5xl items-center font-extrabold gap-4">

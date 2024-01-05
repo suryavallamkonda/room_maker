@@ -18,7 +18,7 @@ function Navbar() {
 export default function Layout({ children }) {
   return (
     <>
-      <Navbar />
+      {/* <Nav  bar /> */}
       <main>{children}</main>
     </>
   );
